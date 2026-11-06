@@ -1,0 +1,11 @@
+.env
+.git
+.gitignore
+venv/
+.venv/
+logs/
+*.db
+__pycache__/
+*.zip
+README.md
+vk-daily-bot.service

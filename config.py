@@ -7,6 +7,9 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
 
+# В Docker данные лежат в /data (задаётся в Dockerfile), локально рядом с кодом
+DATA_DIR = Path(os.getenv("DATA_DIR", str(BASE_DIR)))
+
 
 @dataclass(frozen=True)
 class Config:
@@ -42,7 +45,7 @@ def load_config() -> Config:
         hour=hour,
         minute=minute,
         days=os.getenv("SEND_DAYS", "tue,wed,thu,fri,sat,sun").lower().replace(" ", ""),
-        db_path=BASE_DIR / "bot.db",
+        db_path=DATA_DIR / "bot.db",
         messages_path=BASE_DIR / "messages.json",
-        log_dir=BASE_DIR / "logs",
+        log_dir=DATA_DIR / "logs",
     )

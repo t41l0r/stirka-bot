@@ -1,0 +1,18 @@
+services:
+  bot:
+    build: .
+    container_name: stirka-bot
+    restart: unless-stopped
+    # Токен и настройки берутся из файла .env рядом с этим файлом
+    env_file:
+      - .env
+    environment:
+      TZ: Europe/Moscow
+    volumes:
+      # База и логи сохраняются при перезапуске и обновлении контейнера
+      - bot-data:/data
+      # Тексты сообщений можно менять без пересборки
+      - ./messages.json:/app/messages.json:ro
+
+volumes:
+  bot-data:
