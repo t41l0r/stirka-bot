@@ -1,0 +1,15 @@
+[Unit]
+Description=VK Daily Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=botuser
+WorkingDirectory=/opt/stirka-bot
+ExecStart=/opt/stirka-bot/venv/bin/python main.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
